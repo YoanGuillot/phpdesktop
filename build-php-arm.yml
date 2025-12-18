@@ -1,0 +1,61 @@
+# This workflow builds PHP with cURL and FTP enabled for Mac ARM (Apple Silicon)
+# Place this file in .github/workflows/build-php-arm.yml in your forked repo
+
+name: Build PHP for Mac ARM with cURL and FTP
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ mac130 ]
+
+jobs:
+  build-php-arm:
+    runs-on: macos-14  # macos-14 is Apple Silicon (ARM64)
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          brew update
+          brew install autoconf bison re2c libxml2 openssl@3 curl libpng libjpeg freetype icu4c libzip
+
+      - name: Download PHP source
+        run: |
+          curl -LO https://www.php.net/distributions/php-8.2.15.tar.gz
+          tar -xzf php-8.2.15.tar.gz
+          mv php-8.2.15 php-src
+
+      - name: Configure PHP with cURL and FTP
+        run: |
+          cd php-src
+          ./buildconf --force
+          ./configure \
+            --prefix=$GITHUB_WORKSPACE/php-arm-build \
+            --with-curl \
+            --enable-ftp \
+            --with-openssl=$(brew --prefix openssl@3) \
+            --with-zlib \
+            --with-libxml \
+            --enable-mbstring \
+            --with-zip \
+            --with-pdo-mysql \
+            --with-pdo-sqlite \
+            --with-iconv \
+            --enable-sockets \
+            --enable-exif \
+            --with-jpeg \
+            --with-freetype \
+            --with-png
+
+      - name: Build PHP
+        run: |
+          cd php-src
+          make -j$(sysctl -n hw.ncpu)
+          make install
+
+      - name: Archive built PHP
+        uses: actions/upload-artifact@v4
+        with:
+          name: php-arm-build
+          path: php-arm-build/
