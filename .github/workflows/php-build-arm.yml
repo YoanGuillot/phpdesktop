@@ -54,17 +54,17 @@ jobs:
       - name: Build dependencies and PHP
         run: |
           cd phpdesktop/php-arm64
-          chmod +x ../buildopenssl.sh ../buildiconv.sh ../buildxml.sh ../buildzlib.sh ../buildsqlite.sh ../buildpng.sh ../buildjpeg.sh ../buildonig.sh ../buildphp.sh ../cleanbuild.sh
-          ../buildopenssl.sh
-          ../buildiconv.sh
-          ../buildxml.sh
-          ../buildzlib.sh
-          ../buildsqlite.sh
-          ../buildpng.sh
-          ../buildjpeg.sh
-          ../buildonig.sh
-          ../buildphp.sh
-          ../cleanbuild.sh
+          chmod +x ../../buildopenssl.sh ../../buildiconv.sh ../../buildxml.sh ../../buildzlib.sh ../../buildsqlite.sh ../../buildpng.sh ../../buildjpeg.sh ../../buildonig.sh ../../buildphp.sh ../../cleanbuild.sh
+          ../../buildopenssl.sh
+          ../../buildiconv.sh
+          ../../buildxml.sh
+          ../../buildzlib.sh
+          ../../buildsqlite.sh
+          ../../buildpng.sh
+          ../../buildjpeg.sh
+          ../../buildonig.sh
+          ../../buildphp.sh
+          ../../cleanbuild.sh
 
       - name: Archive built PHP
         uses: actions/upload-artifact@v4
