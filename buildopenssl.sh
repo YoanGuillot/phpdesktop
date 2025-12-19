@@ -47,6 +47,7 @@ echo "Configure OpenSSL..."
     --openssldir=${openssl_dir}/dist-openssldir
 echo "Build OpenSSL..."
 make install
+ls -l ./dist-install/lib/
 
 cp ./dist-install/lib/libcrypto.3.dylib ./../libcrypto.3.dylib
 cp ./dist-install/lib/libssl.3.dylib ./../libssl.3.dylib
