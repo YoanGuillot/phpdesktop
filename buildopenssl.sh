@@ -42,7 +42,7 @@ openssl_dir=$(realpath $(pwd))
 echo "Found OpenSSL: ${openssl_dir}"
 
 echo "Configure OpenSSL..."
-./Configure \
+./Configure darwin64-arm64-cc \
     --prefix=${openssl_dir}/dist-install \
     --openssldir=${openssl_dir}/dist-openssldir
 echo "Build OpenSSL..."
