@@ -17,12 +17,12 @@ jobs:
 
       - name: Prepare build directory
         run: |
-          mkdir -p phpdesktop/php-arm64
-          cd phpdesktop/php-arm64
+          mkdir -p php-arm64
+          cd php-arm64
 
       - name: Download all sources
         run: |
-          cd phpdesktop/php-arm64
+          cd php-arm64
           # OpenSSL
           curl -LO https://github.com/openssl/openssl/archive/refs/tags/OpenSSL_1_1_1w.tar.gz
           tar -xzf OpenSSL_1_1_1w.tar.gz
@@ -53,21 +53,21 @@ jobs:
 
       - name: Build dependencies and PHP
         run: |
-          cd phpdesktop/php-arm64
-          chmod +x ../../buildopenssl.sh ../../buildiconv.sh ../../buildxml.sh ../../buildzlib.sh ../../buildsqlite.sh ../../buildpng.sh ../../buildjpeg.sh ../../buildonig.sh ../../buildphp.sh ../../cleanbuild.sh
-          ../../buildopenssl.sh
-          ../../buildiconv.sh
-          ../../buildxml.sh
-          ../../buildzlib.sh
-          ../../buildsqlite.sh
-          ../../buildpng.sh
-          ../../buildjpeg.sh
-          ../../buildonig.sh
-          ../../buildphp.sh
-          ../../cleanbuild.sh
+          cd php-arm64
+          chmod +x ../buildopenssl.sh ../buildiconv.sh ../buildxml.sh ../buildzlib.sh ../buildsqlite.sh ../buildpng.sh ../buildjpeg.sh ../buildonig.sh ../buildphp.sh ../cleanbuild.sh
+          ../buildopenssl.sh
+          ../buildiconv.sh
+          ../buildxml.sh
+          ../buildzlib.sh
+          ../buildsqlite.sh
+          ../buildpng.sh
+          ../buildjpeg.sh
+          ../buildonig.sh
+          ../buildphp.sh
+          ../cleanbuild.sh
 
       - name: Archive built PHP
         uses: actions/upload-artifact@v4
         with:
           name: php-arm-build
-          path: phpdesktop/php-arm64/php-arm-build/
+          path: php-arm64/php-arm-build/
