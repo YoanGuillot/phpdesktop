@@ -53,8 +53,8 @@ echo "Configure libxml2..."
 echo "Build libxml2..."
 make install
 
-cp ./dist-install/lib/libxml2.2.dylib ./../libxml2.2.dylib
-install_name_tool -id libxml2.2.dylib ./../libxml2.2.dylib
-install_name_tool -change $iconv_dir/dist-install/lib/libiconv.2.dylib libiconv.2.dylib ./../libxml2.2.dylib
+cp ./dist-install/lib/libxml2.dylib ./../libxml2.dylib
+install_name_tool -id libxml2.dylib ./../libxml2.dylib
+install_name_tool -change $iconv_dir/dist-install/lib/libiconv.2.dylib libiconv.2.dylib ./../libxml2.dylib
 
 echo "Done."
