@@ -164,7 +164,7 @@ install_name_tool -delete_rpath $onig_dir/dist-install/lib ./php-cgi
 install_name_tool -change $openssl_dir/dist-install/lib/libcrypto.3.dylib libcrypto.3.dylib ./php-cgi
 install_name_tool -change $openssl_dir/dist-install/lib/libssl.3.dylib libssl.3.dylib ./php-cgi
 install_name_tool -change $iconv_dir/dist-install/lib/libiconv.2.dylib libiconv.2.dylib ./php-cgi
-install_name_tool -change $libxml2_dir/dist-install/lib/libxml2.2.dylib libxml2.2.dylib ./php-cgi
+install_name_tool -change $libxml2_dir/dist-install/lib/libxml2.dylib libxml2.dylib ./php-cgi
 install_name_tool -change $sqlite_dir/dist-install/lib/libsqlite3.dylib libsqlite3.dylib ./php-cgi
 install_name_tool -change $zlib_dir/dist-install/lib/libz.1.dylib libz.1.dylib ./php-cgi
 install_name_tool -change $png_dir/dist-install/lib/libpng16.16.dylib libpng.dylib ./php-cgi
