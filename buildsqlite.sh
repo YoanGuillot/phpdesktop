@@ -53,7 +53,7 @@ echo "Configure sqlite..."
 echo "Build sqlite..."
 make install
 
-cp ./dist-install/lib/libsqlite3.dylib.3.* ./../libsqlite3.dylib
+cp ./dist-install/lib/libsqlite3.dylib ./../libsqlite3.dylib
 install_name_tool -id libsqlite3.dylib ./../libsqlite3.dylib
 install_name_tool -delete_rpath $sqlite_dir/dist-install/lib ./../libsqlite3.dylib
 install_name_tool -change $zlib_dir/dist-install/lib/libz.1.dylib libz.1.dylib ./../libsqlite3.dylib
