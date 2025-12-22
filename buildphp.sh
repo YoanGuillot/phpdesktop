@@ -197,4 +197,18 @@ install_name_tool -change $onig_dir/dist-install/lib/libonig.5.dylib libonig.dyl
 # Ajout pour libcurl locale
 install_name_tool -change $curl_dir/dist-install/lib/libcurl.4.dylib @loader_path/libcurl.dylib ./php-cgi
 
+# Préparer le dossier d'artefacts pour GitHub Actions
+mkdir -p "$php_dir/php-arm-build"
+cp php-cgi php.ini "$root_dir/libcurl.dylib" \
+  "$openssl_dir/dist-install/lib/libcrypto.3.dylib" \
+  "$openssl_dir/dist-install/lib/libssl.3.dylib" \
+  "$iconv_dir/dist-install/lib/libiconv.2.dylib" \
+  "$libxml2_dir/dist-install/lib/libxml2.dylib" \
+  "$sqlite_dir/dist-install/lib/libsqlite3.dylib" \
+  "$zlib_dir/dist-install/lib/libz.1.dylib" \
+  "$png_dir/dist-install/lib/libpng16.16.dylib" \
+  "$jpeg_dir/dist-install/lib/libjpeg.9.dylib" \
+  "$onig_dir/dist-install/lib/libonig.5.dylib" \
+  "$php_dir/php-arm-build/"
+
 echo "Done."
