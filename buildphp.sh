@@ -170,6 +170,5 @@ install_name_tool -change $zlib_dir/dist-install/lib/libz.1.dylib libz.1.dylib .
 install_name_tool -change $png_dir/dist-install/lib/libpng16.16.dylib libpng.dylib ./php-cgi
 install_name_tool -change $jpeg_dir/dist-install/lib/libjpeg.9.dylib libjpeg.dylib ./php-cgi
 install_name_tool -change $onig_dir/dist-install/lib/libonig.5.dylib libonig.dylib ./php-cgi
-install_name_tool -change $curl_dir/dist-install/lib/libonig.5.dylib libonig.dylib ./php-cgi
 
 echo "Done."
