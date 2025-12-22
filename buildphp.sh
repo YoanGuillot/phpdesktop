@@ -54,6 +54,17 @@ echo "Found PHP: ${php_dir}"
 rm -f php-cgi
 rm -f php.ini
 
+# Build local libcurl before continuing
+if [ -f "$root_dir/buildcurl.sh" ]; then
+    bash "$root_dir/buildcurl.sh"
+else
+    echo "buildcurl.sh not found!"
+    exit 1
+fi
+
+rm -f php-cgi
+rm -f php.ini
+
 if ! cd $php_dir/openssl-*/ ; then
     echo "Can't find openssl directory"
     exit 1
@@ -134,6 +145,16 @@ export JPEG_CFLAGS="-I${jpeg_dir}/dist-install/include"
 export JPEG_LIBS="-L${jpeg_dir}/dist-install/lib -ljpeg"
 export ONIG_CFLAGS="-I${onig_dir}/dist-install/include"
 export ONIG_LIBS="-L${onig_dir}/dist-install/lib -lonig"
+# Detect and set CURL paths
+if ! cd $php_dir/curl-*/ ; then
+    echo "Can't find curl directory"
+    exit 1
+fi
+curl_dir=$(realpath $(pwd))
+echo "Found CURL: ${curl_dir}"
+export CURL_CFLAGS="-I${curl_dir}/dist-install/include"
+export CURL_LIBS="-L${curl_dir}/dist-install/lib -lcurl"
+cd $php_sources_dir
 ./configure -v \
     --prefix=${php_sources_dir}/dist-install \
     --exec-prefix=${php_sources_dir}/dist-install \
@@ -143,7 +164,9 @@ export ONIG_LIBS="-L${onig_dir}/dist-install/lib -lonig"
     --with-zlib="$zlib_dir/dist-install"  \
     --enable-gd \
     --with-jpeg \
-    --enable-mbstring
+    --enable-mbstring \
+    --with-curl="$curl_dir/dist-install" \
+    --enable-ftp
 echo "Build PHP..."
 make install
 
@@ -170,5 +193,8 @@ install_name_tool -change $zlib_dir/dist-install/lib/libz.1.dylib libz.1.dylib .
 install_name_tool -change $png_dir/dist-install/lib/libpng16.16.dylib libpng.dylib ./php-cgi
 install_name_tool -change $jpeg_dir/dist-install/lib/libjpeg.9.dylib libjpeg.dylib ./php-cgi
 install_name_tool -change $onig_dir/dist-install/lib/libonig.5.dylib libonig.dylib ./php-cgi
+
+# Ajout pour libcurl locale
+install_name_tool -change $curl_dir/dist-install/lib/libcurl.4.dylib libcurl.4.dylib ./php-cgi
 
 echo "Done."
