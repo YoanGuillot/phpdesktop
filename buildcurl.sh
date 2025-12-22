@@ -31,6 +31,9 @@ make -j$(nproc)
 make install
 
 # Copier la bibliothèque dynamique à la racine du projet
-cp ./dist-install/lib/libcurl*.dylib "$root_dir/libcurl.dylib"
+rm -f "$root_dir/libcurl.dylib"
+if [ -f ./dist-install/lib/libcurl.4.dylib ]; then
+    cp ./dist-install/lib/libcurl.4.dylib "$root_dir/libcurl.dylib"
+fi
 
 echo "libcurl built and installed locally."
