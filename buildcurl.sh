@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#!/bin/bash
-
 # This script builds libcurl for local use in the PHP build.
 # Downloads, configures, and installs libcurl into a local dist-install directory.
 
@@ -31,3 +29,8 @@ cd curl-*/
 ./configure --prefix=$(pwd)/dist-install --with-ssl
 make -j$(nproc)
 make install
+
+# Copier la bibliothèque dynamique à la racine du projet
+cp ./dist-install/lib/libcurl*.dylib "$root_dir/libcurl.dylib"
+
+echo "libcurl built and installed locally."

@@ -195,6 +195,6 @@ install_name_tool -change $jpeg_dir/dist-install/lib/libjpeg.9.dylib libjpeg.dyl
 install_name_tool -change $onig_dir/dist-install/lib/libonig.5.dylib libonig.dylib ./php-cgi
 
 # Ajout pour libcurl locale
-install_name_tool -change $curl_dir/dist-install/lib/libcurl.4.dylib libcurl.4.dylib ./php-cgi
+install_name_tool -change $curl_dir/dist-install/lib/libcurl.4.dylib @loader_path/libcurl.dylib ./php-cgi
 
 echo "Done."
